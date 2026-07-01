@@ -7,68 +7,94 @@
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 <style>
   :root{
-    --bg:#fafaf9;
-    --surface:#ffffff;
-    --ink:#131313;
-    --muted:#8a8a86;
-    --line:#ececea;
-    --accent:#0f9d6e;
-    --accent-ink:#ffffff;
-    --radius:20px;
+    --bg:#0c0b0a;
+    --surface:#161412;
+    --surface-2:#1d1a17;
+    --gold:#c9a24d;
+    --gold-soft:#e6cd8f;
+    --ivory:#f2ead9;
+    --muted:#8f8578;
+    --line:rgba(201,162,77,0.18);
+    --radius:4px;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    background:
+      radial-gradient(circle at 50% 0%, #1a1712 0%, #0c0b0a 55%);
+    color:var(--ivory);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing:antialiased;
   }
 
   header{
-    position:sticky;
-    top:0;
-    z-index:10;
-    background:rgba(250,250,249,0.85);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    padding:20px 20px 14px;
-    border-bottom:1px solid var(--line);
+    padding:52px 24px 30px;
+    text-align:center;
+  }
+  .kicker{
+    font-size:10.5px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
   }
   header h1{
-    margin:0;
-    font-size:22px;
-    font-weight:700;
-    letter-spacing:-0.01em;
+    font-family:Georgia,'Times New Roman',serif;
+    font-weight:400;
+    font-size:clamp(30px,7vw,40px);
+    letter-spacing:.02em;
+    margin:0 0 10px;
+    color:var(--ivory);
+  }
+  .rule{
+    width:56px;
+    height:1px;
+    background:var(--gold);
+    margin:0 auto 14px;
+    opacity:.7;
   }
   header p{
-    margin:4px 0 0;
-    font-size:13px;
+    margin:0;
+    font-size:12.5px;
     color:var(--muted);
+    letter-spacing:.03em;
   }
 
   main{
-    max-width:520px;
+    max-width:540px;
     margin:0 auto;
-    padding:18px 16px 48px;
+    padding:8px 18px 60px;
     display:flex;
     flex-direction:column;
-    gap:16px;
+    gap:22px;
   }
 
   .card{
-    background:var(--surface);
+    background:linear-gradient(180deg, var(--surface), var(--surface-2));
     border:1px solid var(--line);
     border-radius:var(--radius);
     overflow:hidden;
+    position:relative;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:var(--radius);
+    padding:1px;
+    pointer-events:none;
+    background:linear-gradient(160deg, rgba(201,162,77,0.35), transparent 40%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
   }
 
   .model-wrap{
     position:relative;
     width:100%;
-    height:230px;
-    background:
-      radial-gradient(circle at 30% 20%, #f2f2f0 0%, #eaeae8 60%, #e3e3e0 100%);
+    height:250px;
+    background:radial-gradient(circle at 50% 35%, #221e18 0%, #14120f 75%);
+    border-bottom:1px solid var(--line);
   }
   model-viewer{
     width:100%;
@@ -76,83 +102,92 @@
     --poster-color:transparent;
   }
 
+  .index{
+    position:absolute;
+    left:16px;
+    top:16px;
+    z-index:2;
+    font-family:Georgia, serif;
+    font-size:11px;
+    letter-spacing:.1em;
+    color:var(--gold-soft);
+    border:1px solid var(--line);
+    padding:5px 10px;
+    border-radius:2px;
+    background:rgba(12,11,10,0.55);
+    backdrop-filter:blur(6px);
+  }
+
   .ar-pill{
     position:absolute;
-    right:12px;
-    bottom:12px;
+    right:14px;
+    bottom:14px;
     z-index:2;
     display:flex;
     align-items:center;
-    gap:6px;
-    background:var(--ink);
-    color:#fff;
+    gap:7px;
+    background:var(--gold);
+    color:#161412;
     border:none;
-    padding:9px 14px 9px 12px;
-    border-radius:999px;
-    font-size:12.5px;
-    font-weight:600;
+    padding:10px 16px 10px 13px;
+    border-radius:2px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
     cursor:pointer;
-    box-shadow:0 6px 16px rgba(0,0,0,0.18);
+    box-shadow:0 8px 20px rgba(0,0,0,0.4);
   }
-  .ar-pill svg{width:15px;height:15px;flex-shrink:0;}
+  .ar-pill svg{width:14px;height:14px;flex-shrink:0;}
 
   .card-body{
-    padding:16px 18px 18px;
+    padding:20px 22px 24px;
+  }
+  .name-row{
     display:flex;
     justify-content:space-between;
-    align-items:flex-start;
-    gap:10px;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:8px;
   }
   .name{
-    margin:0 0 4px;
-    font-size:16.5px;
-    font-weight:700;
-    letter-spacing:-0.005em;
-  }
-  .desc{
-    margin:0;
-    font-size:13px;
-    color:var(--muted);
-    line-height:1.45;
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:19px;
+    font-weight:400;
+    letter-spacing:.01em;
+    color:var(--ivory);
   }
   .price{
     flex-shrink:0;
-    background:#eef8f3;
-    color:var(--accent);
-    font-weight:700;
-    font-size:13.5px;
-    padding:7px 12px;
-    border-radius:999px;
+    font-family:Georgia, serif;
+    font-size:16px;
+    color:var(--gold-soft);
     white-space:nowrap;
   }
-
-  .rotate-tag{
-    position:absolute;
-    left:12px;
-    top:12px;
-    z-index:2;
-    background:rgba(255,255,255,0.85);
-    backdrop-filter:blur(4px);
+  .desc{
+    margin:0;
+    font-size:12.5px;
     color:var(--muted);
-    font-size:11px;
-    font-weight:600;
-    padding:6px 10px;
-    border-radius:999px;
+    line-height:1.6;
+    letter-spacing:.01em;
   }
 
   footer{
     text-align:center;
-    padding:8px 20px 28px;
-    font-size:11.5px;
+    padding:10px 20px 34px;
+    font-size:11px;
     color:var(--muted);
+    letter-spacing:.03em;
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Menu</h1>
-  <p>Model ghumaayein &middot; tap karke apni jagah AR mein dekhein</p>
+  <div class="kicker">Table Preview</div>
+  <h1>The Menu</h1>
+  <div class="rule"></div>
+  <p>Model ghumaayein &middot; AR mein apni jagah dekhein</p>
 </header>
 
 <main id="menu"></main>
@@ -160,9 +195,6 @@
 <footer>Android par turant AR khulega &middot; iPhone AR abhi supported nahi</footer>
 
 <script>
-// ------------------------------------------------------------------
-// Dish data — naam, description, price aur model file path
-// ------------------------------------------------------------------
 const dishes = [
   {
     name: "Chocolate Cake",
@@ -205,12 +237,12 @@ const arIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 
 const menu = document.getElementById('menu');
 
-dishes.forEach((d) => {
+dishes.forEach((d, i) => {
   const card = document.createElement('div');
   card.className = 'card';
   card.innerHTML = `
     <div class="model-wrap">
-      <span class="rotate-tag">3D</span>
+      <span class="index">${String(i + 1).padStart(2, '0')}</span>
       <model-viewer
         src="${d.glb}"
         ${d.usdz ? `ios-src="${d.usdz}"` : ''}
@@ -219,20 +251,19 @@ dishes.forEach((d) => {
         ar-modes="${d.usdz ? 'webxr scene-viewer quick-look' : 'webxr scene-viewer'}"
         camera-controls
         auto-rotate
-        disable-zoom
-        shadow-intensity="0.7"
-        exposure="1"
+        shadow-intensity="0.9"
+        exposure="0.95"
         loading="lazy"
         reveal="auto">
         <button slot="ar-button" class="ar-pill">${arIcon}View in AR</button>
       </model-viewer>
     </div>
     <div class="card-body">
-      <div>
-        <p class="name">${d.name}</p>
-        <p class="desc">${d.desc}</p>
+      <div class="name-row">
+        <span class="name">${d.name}</span>
+        <span class="price">${d.price}</span>
       </div>
-      <div class="price">${d.price}</div>
+      <p class="desc">${d.desc}</p>
     </div>
   `;
   menu.appendChild(card);
